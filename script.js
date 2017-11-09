@@ -5,6 +5,7 @@ document.onkeyup = (event) => {
         if (audio.paused) {
             audio.play();
         } else {
+            var fadeInterval = setInterval(function(){fadeOut(audio) },300);
             fadeOut(audio);
         }
     }
@@ -12,5 +13,11 @@ document.onkeyup = (event) => {
 
 function fadeOut(audio) {
     // TODO: loop for 2 seconds dropping the volume as you go
-    audio.pause()
+    if(audio.volume >= 0.0){
+          audio.volume -= 0.1;
+      }else{
+          //audio.pause();
+          clearInterval(fadeInterval)
+          audio.pause();
+      }
 }
